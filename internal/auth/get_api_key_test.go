@@ -1,17 +1,17 @@
 package auth
 
 import (
-	"testing"
-	"net/http"
 	"errors"
 	"fmt"
+	"net/http"
+	"testing"
 )
 
 func TestGetApiKey(t *testing.T) {
 	tests := []struct {
-		input 	http.Header
-		outStr 	string
-		outErr	error
+		input  http.Header
+		outStr string
+		outErr error
 	}{
 		// headers set in next loop
 		{input: nil, outStr: "pickles", outErr: nil},
@@ -37,20 +37,20 @@ func TestGetApiKey(t *testing.T) {
 		str, err := GetAPIKey(testCase.input)
 		if err != nil && testCase.outErr != nil { // both err not nil
 			if str != testCase.outStr || err.Error() != testCase.outErr.Error() {
-				t.Fatalf("expected:\n%v | %v\ngot: %v | %v", 
-				testCase.outStr, testCase.outErr,
-				str, err)
+				t.Fatalf("expected:\n%v | %v\ngot: %v | %v",
+					testCase.outStr, testCase.outErr,
+					str, err)
 			}
 		} else if err == nil && testCase.outErr == nil { // both err nil
 			if str != testCase.outStr {
-				t.Fatalf("expected:\n%v | %v\ngot: %v | %v", 
-				testCase.outStr, testCase.outErr,
-				str, err)
+				t.Fatalf("expected:\n%v | %v\ngot: %v | %v",
+					testCase.outStr, testCase.outErr,
+					str, err)
 			}
 		} else { // err different
-			t.Fatalf("expected:\n%v | %v\ngot: %v | %v", 
-			testCase.outStr, testCase.outErr,
-			str, err)
+			t.Fatalf("expected:\n%v | %v\ngot: %v | %v",
+				testCase.outStr, testCase.outErr,
+				str, err)
 		}
 	}
 }
